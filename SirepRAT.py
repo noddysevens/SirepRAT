@@ -31,11 +31,13 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-File:       SirepRAT.py
-Purpose:    Exploit Windows IoT Core's Sirep service to execute remote commands on the device
-Author:     Dor Azouri <dor.azouri@safebreach.com>
-Date:       2018-08-19 08:03:08
+File:         SirepRAT.py
+Purpose:      Exploit Windows IoT Core's Sirep service to execute remote commands on the device
+Author:       Dor Azouri <dor.azouri@safebreach.com>
+Modified By:  David Gillett <david@enseven.io>
+Date:         2020-09-04 05:15
 """
+
 
 import argparse
 import logging
@@ -43,7 +45,6 @@ import socket
 import string
 import struct
 import sys
-
 import hexdump
 
 from common.constants import SIREP_VERSION_GUID_LEN, LOGGING_FORMAT, LOGGING_LEVEL, SIREP_PORT, INT_SIZE, \
@@ -165,7 +166,7 @@ def main(args):
         try:
             sirep_command = sirep_command_ctor(*command_args)
         except TypeError:
-            logging.error("Wrong usage. use --help for instructions")
+            logging.error("Wrong Command Type Given " + sirep_command +". use --help for instructions")
             sys.exit()
         sirep_connect(sock, dst_ip, verbose=args.vv)
         sirep_result_buffers = sirep_send_command(sock, sirep_command, print_printable_data=args.v or args.vv,
