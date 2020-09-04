@@ -45,7 +45,7 @@ from models import results
 
 
 def _load_sirep_commands(module, base_class, type_enum, suffix_length):
-    """Loads all available classes from the given module direcroty"""
+    """Loads all available classes from the given module directory"""
     _sirep_commands = {}
     for symbol_name in dir(module):
         symbol = getattr(module, symbol_name)
